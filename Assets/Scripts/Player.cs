@@ -11,32 +11,22 @@ public class Player : MonoBehaviour
 
     private bool _onGround = false;
 
-    private void Start()
+    private void Update()
     {
-        StartCoroutine(ControlCoroutine());
-    }
+        if(Input.GetKey(KeyCode.W))
+            Move(new Vector3(-1, 0, 0)); 
 
-    private IEnumerator ControlCoroutine()
-    {
-        while(true)
-        {                 
-            yield return null;
+        if(Input.GetKey(KeyCode.S))
+            Move(new Vector3(1, 0, 0)); 
 
-            if(Input.GetKey(KeyCode.W))
-                Move(new Vector3(-1, 0, 0)); 
+        if(Input.GetKey(KeyCode.D))
+            Move(new Vector3(0, 0, 1)); 
 
-            if(Input.GetKey(KeyCode.S))
-                Move(new Vector3(1, 0, 0)); 
+        if(Input.GetKey(KeyCode.A))
+            Move(new Vector3(0, 0, -1));
 
-            if(Input.GetKey(KeyCode.D))
-                Move(new Vector3(0, 0, 1)); 
-
-            if(Input.GetKey(KeyCode.A))
-                Move(new Vector3(0, 0, -1));
-
-            if(_onGround && Input.GetKeyDown(KeyCode.Space))
-                Jump();
-        }
+        if(_onGround && Input.GetKeyDown(KeyCode.Space))
+            Jump();
     }
 
     private void Move(Vector3 direction)
